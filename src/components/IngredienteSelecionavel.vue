@@ -13,9 +13,13 @@ export default {
         if (this.selecionado) {
             this.$emit('adicionarIngrediente', this.ingrediente);
         }
+
+        if (!this.selecionado) {
+          this.$emit('removerIngrediente', this.ingrediente);
+        }
     }
   },
-  emits: ['adicionarIngrediente'],
+  emits: ['adicionarIngrediente', 'removerIngrediente'],
   data() {
     return {
       selecionado: false,

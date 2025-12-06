@@ -10,7 +10,7 @@ import IngredienteSelecionavel from './IngredienteSelecionavel.vue';
             required: true}
         },
         components: { Tag, IngredienteSelecionavel },
-        emits: ['adicionarIngrediente']
+        emits: ['adicionarIngrediente', 'removerIngrediente']
     }
 </script>
 
@@ -26,7 +26,8 @@ import IngredienteSelecionavel from './IngredienteSelecionavel.vue';
             <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
                 <IngredienteSelecionavel 
                 :ingrediente="ingrediente"
-                @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"/>
+                @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
+                @remover-ingrediente="$emit('removerIngrediente', $event)"/>
             </li>
         </ul>
     </article>
