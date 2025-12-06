@@ -9,7 +9,8 @@ import IngredienteSelecionavel from './IngredienteSelecionavel.vue';
             categoria: {type: Object as PropType<ICategoria>,
             required: true}
         },
-        components: { Tag, IngredienteSelecionavel }
+        components: { Tag, IngredienteSelecionavel },
+        emits: ['adicionarIngrediente']
     }
 </script>
 
@@ -23,7 +24,9 @@ import IngredienteSelecionavel from './IngredienteSelecionavel.vue';
 
         <ul class="categoria__ingredientes">
             <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-                <IngredienteSelecionavel :ingrediente="ingrediente"/>
+                <IngredienteSelecionavel 
+                :ingrediente="ingrediente"
+                @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"/>
             </li>
         </ul>
     </article>

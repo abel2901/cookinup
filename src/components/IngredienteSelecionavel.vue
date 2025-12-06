@@ -6,6 +6,16 @@ export default {
   props: {
     ingrediente: { type: String, required: true },
   },
+  methods: {
+    aoClicar() {
+        this.selecionado = !this.selecionado
+
+        if (this.selecionado) {
+            this.$emit('adicionarIngrediente', this.ingrediente);
+        }
+    }
+  },
+  emits: ['adicionarIngrediente'],
   data() {
     return {
       selecionado: false,
@@ -17,7 +27,7 @@ export default {
 <template>
   <button
     class="ingrediente"
-    v-on:click="selecionado = !selecionado"
+    @click="aoClicar"
     :aria-pressed="selecionado"
   >
     <Tag :texto="ingrediente" :ativa="selecionado" />

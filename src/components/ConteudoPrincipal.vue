@@ -6,17 +6,22 @@ import SuaLista from './SuaLista.vue';
 export default {
     data() {
         return {
-            ingredientes: ['Alho', 'Manteiga', 'Orégano']
+            ingredientes: [] as string[]
         }
     },
-    components: { SelecionarIngredientes, Tag, SuaLista }
+    components: { SelecionarIngredientes, Tag, SuaLista },
+    methods: {
+      adicionarIngrediente(ingrediente: string) {
+        this.ingredientes.push(ingrediente);
+      }
+    }
 }
 </script>
 
 <template>
     <main class="conteudo-principal">
-        <SuaLista :listaIngredientes="ingredientes"/>
-        <SelecionarIngredientes />
+        <SuaLista :ingredientes="ingredientes"/>
+        <SelecionarIngredientes @adicionarIngrediente="adicionarIngrediente"/>
     </main>
 </template>
 
@@ -31,17 +36,6 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 5rem;
-}
-
-.lista-vazia {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-
-  color: var(--coral, #F0633C);
-  text-align: center;
 }
 
 @media only screen and (max-width: 1300px) {
