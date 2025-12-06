@@ -2,6 +2,7 @@
 import SelecionarIngredientes from './SelecionarIngredientes.vue';
 import Tag from './Tag.vue';
 import SuaLista from './SuaLista.vue';
+import BotaoPrincipal from './BotaoPrincipal.vue';
 
 export default {
     data() {
@@ -9,7 +10,7 @@ export default {
             ingredientes: [] as string[]
         }
     },
-    components: { SelecionarIngredientes, Tag, SuaLista },
+    components: { SelecionarIngredientes, Tag, SuaLista, BotaoPrincipal },
     methods: {
       adicionarIngrediente(ingrediente: string) {
         this.ingredientes.push(ingrediente);
@@ -25,6 +26,7 @@ export default {
     <main class="conteudo-principal">
         <SuaLista :ingredientes="ingredientes" />
         <SelecionarIngredientes @adicionarIngrediente="adicionarIngrediente" @removerIngrediente="removerIngrediente"/>
+        <BotaoPrincipal />
     </main>
 </template>
 
