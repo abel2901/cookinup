@@ -1,5 +1,6 @@
 <script lang="ts">
 import ListaCategoriaReceita from './ListaCategoriaReceita.vue';
+import BotaoEditarLista from './BotaoEditarLista.vue';
 
 export default {
   data() {
@@ -24,7 +25,7 @@ export default {
       this.error = err as Error;
     }
   },
-  components: { ListaCategoriaReceita },
+  components: { ListaCategoriaReceita, BotaoEditarLista },
 };
 </script>
 
@@ -36,6 +37,7 @@ export default {
       tem por aí!
     </p>
     <ListaCategoriaReceita :receitas="receitas" />
+    <BotaoEditarLista texto="Editar Lista"/>
   </section>
 </template>
 
