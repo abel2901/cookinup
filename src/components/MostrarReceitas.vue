@@ -1,15 +1,16 @@
 <script lang="ts">
 import ListaCategoriaReceita from './ListaCategoriaReceita.vue';
-import BotaoEditarLista from './BotaoEditarLista.vue';
+import BotaoPrincipal from './BotaoPrincipal.vue';
 
 export default {
   data() {
     return {
       receitas: [] as any[],
       error: null as Error | null,
+      pagina: 'ConteudoPrincipal'
     };
   },
-
+  emits: ['editarReceitas'],
   async mounted() {
     try {
       const res = await fetch(
@@ -25,7 +26,7 @@ export default {
       this.error = err as Error;
     }
   },
-  components: { ListaCategoriaReceita, BotaoEditarLista },
+  components: { ListaCategoriaReceita, BotaoPrincipal },
 };
 </script>
 
@@ -37,7 +38,7 @@ export default {
       tem por aí!
     </p>
     <ListaCategoriaReceita :receitas="receitas" />
-    <BotaoEditarLista texto="Editar Lista"/>
+    <BotaoPrincipal texto="Editar Lista" @click="$emit('editarReceitas')"/>
   </section>
 </template>
 

@@ -1,51 +1,57 @@
 <script lang="ts">
-import SelecionarIngredientes from './SelecionarIngredientes.vue';
-import Tag from './Tag.vue';
-import SuaLista from './SuaLista.vue';
-import MostrarReceitas from './MostrarReceitas.vue';
+import SelecionarIngredientes from "./SelecionarIngredientes.vue";
+import Tag from "./Tag.vue";
+import SuaLista from "./SuaLista.vue";
+import MostrarReceitas from "./MostrarReceitas.vue";
 
-type Pagina = 'SelecionarIngredientes' | 'MostrarReceitas';
+type Pagina = "SelecionarIngredientes" | "MostrarReceitas";
 
 export default {
-    data() {
-        return {
-            ingredientes: [] as string[],
-            conteudo: 'SelecionarIngredientes' as Pagina
-        }
+  data() {
+    return {
+      ingredientes: [] as string[],
+      conteudo: "SelecionarIngredientes" as Pagina,
+    };
+  },
+  components: { SelecionarIngredientes, Tag, SuaLista, MostrarReceitas },
+  methods: {
+    adicionarIngrediente(ingrediente: string) {
+      this.ingredientes.push(ingrediente);
     },
-    components: { SelecionarIngredientes, Tag, SuaLista, MostrarReceitas },
-    methods: {
-      adicionarIngrediente(ingrediente: string) {
-        this.ingredientes.push(ingrediente);
-      },
-      removerIngrediente(ingrediente: string) {
-        this.ingredientes = this.ingredientes.filter(iLista => ingrediente != iLista);
-      },
-      navegar(pagina: Pagina) {
-        this.conteudo = pagina
-      }
-    }
-}
+    removerIngrediente(ingrediente: string) {
+      this.ingredientes = this.ingredientes.filter(
+        (iLista) => ingrediente != iLista
+      );
+    },
+    navegar(pagina: Pagina) {
+      this.conteudo = pagina;
+    },
+  },
+};
 </script>
 
 <template>
-    <main class="conteudo-principal">
-        <SuaLista :ingredientes="ingredientes" />
-
-        <SelecionarIngredientes v-if="conteudo === 'SelecionarIngredientes'" 
-        @adicionarIngrediente="adicionarIngrediente" 
+  <main class="conteudo-principal">
+    <SuaLista :ingredientes="ingredientes" />
+    <KeepAlive>
+      <SelecionarIngredientes
+        v-if="conteudo === 'SelecionarIngredientes'"
+        @adicionarIngrediente="adicionarIngrediente"
         @removerIngrediente="removerIngrediente"
-        @buscar-receitas="navegar('MostrarReceitas')"/>
+        @buscar-receitas="navegar('MostrarReceitas')"
+      />
 
-        <MostrarReceitas v-else-if="conteudo === 'MostrarReceitas'" />
-    </main>
+      <MostrarReceitas v-else-if="conteudo === 'MostrarReceitas'"
+      @editar-receitas="navegar('SelecionarIngredientes')" />
+    </KeepAlive>
+  </main>
 </template>
 
 <style scoped>
 .conteudo-principal {
   padding: 6.5rem 7.5rem;
   border-radius: 3.75rem 3.75rem 0rem 0rem;
-  background: var(--creme, #FFFAF3);
+  background: var(--creme, #fffaf3);
   color: var(--cinza, #444);
 
   display: flex;
