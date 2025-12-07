@@ -1,4 +1,6 @@
 <script lang="ts">
+import ListaCategoriaReceita from './ListaCategoriaReceita.vue';
+
 export default {
   data() {
     return {
@@ -22,6 +24,7 @@ export default {
       this.error = err as Error;
     }
   },
+  components: { ListaCategoriaReceita },
 };
 </script>
 
@@ -32,12 +35,7 @@ export default {
       Veja as opções de receitas que encontramos com os ingredientes que você
       tem por aí!
     </p>
-    <ul class="categoria__receitas">
-      <li class="card__receita" v-for="(receita, index) in receitas" :key="index">
-        <img class="img_receitas":src="`imagens/receitas/${receita.imagem}`" />
-        <p class="nome__receita">{{ receita.nome }}</p>
-      </li>
-    </ul>
+    <ListaCategoriaReceita :receitas="receitas" />
   </section>
 </template>
 
@@ -56,36 +54,8 @@ export default {
 }
 
 .dica {
-  align-self: flex-start;
   margin-bottom: 3.5rem;
-}
-
-.categoria__receitas {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-  list-style: none;
-  padding: 0;
-}
-
-.card__receita {
-  padding: 1rem;
   text-align: center;
 }
 
-.img_receitas {
-  width: 100%;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  object-fit: cover;
-}
-
-.nome__receita {
-    font-style: normal;
-    font-weight: 700;
-    align-items: center;
-    color: #444444;
-    text-align: center;
-    margin-top: 32px;
-}
 </style>
