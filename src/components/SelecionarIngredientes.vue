@@ -2,6 +2,7 @@
 import { obterCategorias } from '@/http/index';
 import type ICategoria from '@/interface/ICategoria';
 import CardCategoria from './CardCategoria.vue';
+import BotaoPrincipal from './BotaoPrincipal.vue';
 
 
 export default {
@@ -13,8 +14,8 @@ export default {
     async created() {
       this.categorias = await obterCategorias();
     },
-    components: { CardCategoria },
-    emits: ['adicionarIngrediente', 'removerIngrediente']
+    components: { CardCategoria, BotaoPrincipal },
+    emits: ['adicionarIngrediente', 'removerIngrediente','buscarReceitas']
 }
 
 </script>
@@ -32,7 +33,8 @@ export default {
             <CardCategoria 
             :categoria="categoria"
             @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
-            @remover-ingrediente="$emit('removerIngrediente', $event)"/>
+            @remover-ingrediente="$emit('removerIngrediente', $event)"
+            />
         </li>
 
     </ul>
@@ -40,6 +42,8 @@ export default {
     <p class="paragrafo dica">
         *Atenção: consideramos que você tem em casa sal, pimenta e água.
     </p>
+
+    <BotaoPrincipal texto="Buscar Receitas!" @click="$emit('buscarReceitas')"/>
  </section>
 </template>
 
