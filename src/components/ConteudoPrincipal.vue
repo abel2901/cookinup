@@ -26,7 +26,7 @@ export default {
     <main class="conteudo-principal">
         <SuaLista :ingredientes="ingredientes" />
         <SelecionarIngredientes @adicionarIngrediente="adicionarIngrediente" @removerIngrediente="removerIngrediente"/>
-        <BotaoPrincipal />
+        <!-- <BotaoPrincipal :texto="titulo"/> -->
     </main>
 </template>
 
